@@ -21,3 +21,8 @@ app.get('/', (req,res) => {
 app.listen(3000, ()=>{
     console.log('running on port 3000!')
 })
+
+//the microservice part i can think of is host it run on another port.
+// then call that port's endpoint to trigger the process
+// can call port endpoint with CORS, but if use queue then what is it?
+// maybe the intent is that if its 

@@ -10,8 +10,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(express.static(__dirname + '/public'));
 
 
+
 app.get('/', (req,res) => {
-    let name = req.body.name
+    res.render('login.ejs')
+})
+
+
+app.get('/landing', (req,res) => {
     res.render('landing.ejs')
 })
 
@@ -22,6 +27,13 @@ app.post('/checkout', (req,res) => {
     //try think how use loop to make this easily scalable 
     console.log(items)
     res.render('checkout.ejs', {items: items})
+})
+
+
+// stripe
+app.get('/stripe', (req,res) => {
+    let name = req.body.name
+    res.render('landing.ejs')
 })
 
 
