@@ -1,0 +1,4 @@
+for integration testing, do a special message for 'spending group'
+so you test the total_cost fx AND special message fx.
+
+expect.(...)

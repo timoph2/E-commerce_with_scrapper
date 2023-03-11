@@ -1,0 +1,12 @@
+body {
+    background: green;
+}
+
+img {
+    width: 20px;
+    height: 20px;
+}
+
+.card {
+    max-width: 700px;
+}

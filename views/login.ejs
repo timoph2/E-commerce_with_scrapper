@@ -10,16 +10,19 @@
 </head>
 <body class="bg bg-primary">
 <!-- nav bar top fixed -->
+
 <h3> Welcome to PHONE_SHOP</h3>
 
-<div class="send_otp">
-    <input type="text" placeholder="Mobile number"> <button> Send OTP</button>
+<form action="/" method="post">
+    <input type="text" placeholder="Mobile number" name="HP_number" value="<%= HP_number %>"> 
+    <button type="submit"> Send OTP</button> <br>
+</form>
 
-</div>
-<br>
 
-<form action = '/' method="post" >
-    <input type="text" placeholder="OTP"> <button> Verify & log in</button>
+
+<form action ='/login' method="post" >
+    <input type="text" placeholder="OTP" <%= otp_input %> name='otp' > 
+    <button type="submit"> Verify & log in</button>
 </form>
  
 <br>

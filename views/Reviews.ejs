@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/reviews.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body class="bg bg-primary">
@@ -19,11 +19,12 @@ SHOPNAME  ||    Home | about | products | <a href='/compare'> Compare </a>
 
 <form method="post"> 
 <label for="cars">Sort by:</label>
-<select name="cars" id="cars">
-  <option value="popular"> Most popular </option>
-  <option value="!popular"> Least popular </option>
+<select name="sort">
+  <option value=""> </option>
+  <option value="!rating"> Most popular </option>
+  <option value="rating"> Least popular </option>
   <option value="newest"> Newest </option>
-  <option value="oldest"> Oldest </option>
+  <option value="!newest"> Oldest </option>
 </select> 
 <button type="submit"> Go </button>
 </form>
@@ -31,33 +32,25 @@ SHOPNAME  ||    Home | about | products | <a href='/compare'> Compare </a>
 <br> <br>
 
 
-<div class="card">
-    <div class="card-header">
-        <strong> Best site ever, 5 stars, TIMESTAMP DD/MM/TT </strong>
-    </div>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, voluptate? Mollitia provident hic quibusdam placeat.
-</div> <br>
 
-<div class="card">
-    <div class="card-header">
-        <strong> 2 </strong>
-    </div>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, voluptate? Mollitia provident hic quibusdam placeat.
-</div> <br>
+<% all_feedback.forEach( feedback => {  %>
+    <div class="card">
+        <div class="card-header">
+            <% for (i=0; i<feedback.rating; i++) {  %>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJEAAACRCAMAAAD0BqoRAAAAk1BMVEX////+zgD/vg7///3/vQD+zAD+wwr7ywD/3lX8ugD+wAz///n4ygD+3U/+yAf+xgn9+eD55JH+/fP89tj633n+20X91Cf60Cz9+un78MH345X+1jP89M/65an42Y/7vhX41Hj54on53n/77bL733H400H511z76bz77s366KL3wjD5x0b5y1z76bX4wSP71Ez21oPgBvkQAAAE6ElEQVR4nO2aW3eiMBSFAyEiipaCYlAsWkfrrc78/183yQl3vCFGfMheXX1oKXzdZ+fkgggpKSkpKSkpKSkpKSkpKSkpKTUUbhugqr7TbxuhpKW/bBshE6+YY2qmg/DbFA+jb6KR7/chwsibaJrme28TcIxGhBGRUdsgiTCipsZl0rZRUn0TIGJJehM5LEU2t2nitI0CEinyNZGk1rON2YCnNrMIiDSbvgESa9esF800kaRl60CMiKfIn4lsv0OSoF1rY1vTkuHWuksOg/HHZkyk2e2b9MktSorGTPpsG8hhg8zvapn8Nk3iiQGLxiQjYia1twRgT4YUdf2cRzxJbRKBRYM8UMtJomDRrEDEG3dbwmjKLSoWjZk0bY0IUd6uu8Wi8cbdnkmQonLR2kySy1M0GPhlIs12eUmx+JLPgeFJvOcIi7IZpJCk5Cr5ROkTcAgpKudaJCmsXC4TiXrh6vPP2h4yiwbVXINMez1arkKPPpuoaHqfesF0tFn7tklg3iDMovFZIv5LYpr+ejOaBh7tZzeEqje2znXC3+moO2G2kGyWJ9qsy4pGLiEllxHTnnRHu58tdXNgD7N4we57s56Yppmy2Kbvz2az8XjMgAb2VZ4MrGNF+8Px3zzw+qhB3ukmdQUoOMZg0M1pdsOiRMOerhtMlmUdm4TL8WOaDCdWAnQfj6Z19ETGqcniAO8yCwhkQtTN9wXkuZF/3qIUSLfmops9SIR2d+bkukgvdUifNx1pu0pLvjM5eX2kQNYcNevk7C9X9iMMBQ0Ti4zot6FD8M+sqhNXPaU1A4caEsHfBw2z1EmBfsQ9m5kUF66BhrmSPWWbwoPYxKWkZkYvaFqyHBFa3d15KkCdpDEGT9vIQUMLzQcHXAJkhU9yKFU4eQgJQtTTjX341NWbcOmRLMWdyIj4ovKZDsEa3qvvUpxqY+81HvUVJJ6BsG6841Qbp62MXQm8j6nnkgDqGXsqZQcAt6xXuE5aMmmbJFzLpY+4ZLS8g3geD7+rt74XKQY6ePFYlSZ++lADiGVI+pGbs64D5IjOIVV4czeQbhyx3IqB3L+3gdIV0cF9wdbfuR2kdCsErUi6gluL3Gzjofd6Py8gWg2vAw0zILY5+30B0fJ6QyoA6da/FxB1rxIN9YKMwwuILi6TSLaEzYgi+UD0SrCLFRNlk9+zw8vB/qjwMKJQOtHqUoxI1SBONJeLgy4PtTMVgyDxwSbRJIz652e1Czx8ZpP7SSl8YVb7uATEhr/ceYRtSKqDn1w0iCuS+xkgfGZWIx049IwM4yyRtZXIw7UjZR5eGms/p797y+Db1zLRTiYOs/8Pqfpjneb87Nydn6yqT8ZCJhHTusoTTWm8LaDTqMLEZjapg9/Ngk1ggBmnL5q87mDf6depjBS5t2/cgMgz8/lhBi2c4gXIW5RssmR+JIENNfHOaNiBI5hoUX4a7MUXUZ7JkruM5ENNlIv5c9zi8uZQvAjdHnM+SZ3ZMBoNkxMh6+glPyxeAj8Ij2l7kjvY+seE5xBcm6/Y/BccYp/kzmwURhLjuXEwDScPv4IJjiKkyeNPMA6sId54swlIrmCSOtgCK27QN5pewuvO2dRiBRKJnMP+q17Dc7/2e08SDYjSq/kpC9q4zBhhhGoevuBbgVNSUlJSUlJSUlJSUlJSUlJSyus/OKlHW+4sYPEAAAAASUVORK5CYII=">   
+            <% } %>
+            || <%= feedback.date.toLocaleTimeString('en-US') %> || <%= feedback.date.toLocaleDateString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %>
+        </div>
+        <%= feedback.feedback %>
+    </div> <br>
+<% }) %>
 
-<div class="card">
-    <div class="card-header">
-        <strong> 3 </strong>
-    </div>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, voluptate? Mollitia provident hic quibusdam placeat.
-</div> <br>
 
-<div class="card">
-    <div class="card-header">
-        <strong> 4 </strong>
-    </div>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Enim, voluptate? Mollitia provident hic quibusdam placeat.
-</div> <br>
+
+ Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ullam doloremque rerum voluptates autem dolorum reprehenderit totam voluptate facilis optio quaerat
+ 
+
+
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
